@@ -17,40 +17,40 @@ public class EnrollmentForm extends CaptureForm
 	@Override protected void init()
 	{
 		super.init();
-		this.setTitle("Fingerprint Enrollment");
+		this.setTitle("Registro de Huellas");
 		updateStatus();
 	}
 
 	@Override protected void process(DPFPSample sample) {
 		super.process(sample);
-		// Process the sample and create a feature set for the enrollment purpose.
+		// Procesamiento de muestra
 		DPFPFeatureSet features = extractFeatures(sample, DPFPDataPurpose.DATA_PURPOSE_ENROLLMENT);
 
-		// Check quality of the sample and add to enroller if it's good
+		// Chequeo de la calidad de la muestra
 		if (features != null) try
 		{
-			makeReport("The fingerprint feature set was created.");
-			enroller.addFeatures(features);		// Add feature set to template.
+			makeReport("Muestra de huella digital creada.");
+			enroller.addFeatures(features);		// Addicion de muestra
 		}
 		catch (DPFPImageQualityException ex) { }
 		finally {
 			updateStatus();
 
-			// Check if template has been created.
+			// Chequeo si la muestra fue creada.
 			switch(enroller.getTemplateStatus())
 			{
-				case TEMPLATE_STATUS_READY:	// report success and stop capturing
+				case TEMPLATE_STATUS_READY:	// Reportar exito y parar captura
 					stop();
 					((MainForm)getOwner()).setTemplate(enroller.getTemplate());
-					setPrompt("Click Close, and then click Fingerprint Verification.");
+					setPrompt("Click en Cerrar, y entonces click en verificacion de huella.");
 					break;
 
-				case TEMPLATE_STATUS_FAILED:	// report failure and restart capturing
+				case TEMPLATE_STATUS_FAILED:	// Reportar fallo y reiniciar captura
 					enroller.clear();
 					stop();
 					updateStatus();
 					((MainForm)getOwner()).setTemplate(null);
-					JOptionPane.showMessageDialog(EnrollmentForm.this, "The fingerprint template is not valid. Repeat fingerprint enrollment.", "Fingerprint Enrollment", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(EnrollmentForm.this, "La muestra de huella digital no es valida, intente volver a registrar la huella.", "Registro de Huella Digital", JOptionPane.ERROR_MESSAGE);
 					start();
 					break;
 			}
@@ -59,8 +59,8 @@ public class EnrollmentForm extends CaptureForm
 	
 	private void updateStatus()
 	{
-		// Show number of samples needed.
-		setStatus(String.format("Fingerprint samples needed: %1$s", enroller.getFeaturesNeeded()));
+		// Muestra el numero de muestras necesarias
+		setStatus(String.format("Muestras de Huella necesarias: %1$s", enroller.getFeaturesNeeded()));
 	}
 	
 }
