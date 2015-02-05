@@ -20,7 +20,7 @@ public class CaptureForm	extends JDialog
 	
     public CaptureForm(Frame owner) {
         super (owner, true);
-        setTitle("Fingerprint Enrollment");
+        setTitle("Registración de Huellas");
 
 		setLayout(new BorderLayout());
 		rootPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -50,7 +50,7 @@ public class CaptureForm	extends JDialog
 		status.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		status.setFont(UIManager.getFont("Panel.font"));
 		
-		JButton quit = new JButton("Close");
+		JButton quit = new JButton("Cerrar");
         quit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { setVisible(false); }});
 
@@ -95,10 +95,10 @@ public class CaptureForm	extends JDialog
 				SwingUtilities.invokeLater(new Runnable() {	
                                     public void run() {
                                         
-                                        System.out.println(" The fingerprint sample was captured. ");
+                                        System.out.println(" La huella digital fue capturada. ");
                                         
-					makeReport("The fingerprint sample was captured.");
-					setPrompt("Scan the same fingerprint again.");
+					makeReport("La huella digital fue capturada.");
+					setPrompt("Escanea nuevamente la huella digital.");
 					process(e.getSample());
 				}});
 			}
@@ -107,26 +107,26 @@ public class CaptureForm	extends JDialog
 			@Override public void readerConnected(final DPFPReaderStatusEvent e) {
 				SwingUtilities.invokeLater(new Runnable() {	public void run() {
                                     
-                                                System.out.println("CONNECTED");
+                                                System.out.println("CONECTADO");
                                     
-		 			makeReport("The fingerprint reader was connected.");
+		 			makeReport("El lector de huellas fue conectado.");
 				}});
 			}
 			@Override public void readerDisconnected(final DPFPReaderStatusEvent e) {
 				SwingUtilities.invokeLater(new Runnable() {	public void run() {
-					makeReport("The fingerprint reader was disconnected.");
+					makeReport("El lector de huellas fue desconectado.");
 				}});
 			}
 		});
 		capturer.addSensorListener(new DPFPSensorAdapter() {
 			@Override public void fingerTouched(final DPFPSensorEvent e) {
 				SwingUtilities.invokeLater(new Runnable() {	public void run() {
-					makeReport("The fingerprint reader was touched.");
+					makeReport("El lector detecto una pulsación.");
 				}});
 			}
 			@Override public void fingerGone(final DPFPSensorEvent e) {
 				SwingUtilities.invokeLater(new Runnable() {	public void run() {
-					makeReport("The finger was removed from the fingerprint reader.");
+					makeReport("La pulsacion fue removida del lector.");
 				}});
 			}
 		});
@@ -134,9 +134,9 @@ public class CaptureForm	extends JDialog
 			@Override public void onImageQuality(final DPFPImageQualityEvent e) {
 				SwingUtilities.invokeLater(new Runnable() {	public void run() {
 					if (e.getFeedback().equals(DPFPCaptureFeedback.CAPTURE_FEEDBACK_GOOD))
-						makeReport("The quality of the fingerprint sample is good.");
+						makeReport("La calidad de la lectura de la huella es buena");
 					else
-						makeReport("The quality of the fingerprint sample is poor.");
+						makeReport("La calidad de la lectura de la huella es pobre.");
 				}});
 			}
 		});
@@ -151,7 +151,7 @@ public class CaptureForm	extends JDialog
 	protected void start()
 	{
 		capturer.startCapture();
-		setPrompt("Using the fingerprint reader, scan your fingerprint.");
+		setPrompt("Usando lector de huellas.");
 	}
 
 	protected void stop()
