@@ -17,34 +17,34 @@ public class VerificationForm extends CaptureForm
 	@Override protected void init()
 	{
 		super.init();
-		this.setTitle("Fingerprint Enrollment");
+		this.setTitle("Registro de Huella Digital");
 		updateStatus(0);
 	}
 
 	@Override protected void process(DPFPSample sample) {
 		super.process(sample);
 
-		// Process the sample and create a feature set for the enrollment purpose.
+		// Procesamiento de muestra
 		DPFPFeatureSet features = extractFeatures(sample, DPFPDataPurpose.DATA_PURPOSE_VERIFICATION);
 
-		// Check quality of the sample and start verification if it's good
+		// Chequeo de muestra y comienzo de verificacion si la muestra es buena
 		if (features != null)
 		{
-			// Compare the feature set with our template
+			// Compara carateristicas con la muestra
 			DPFPVerificationResult result = 
 				verificator.verify(features, ((MainForm)getOwner()).getTemplate());
 			updateStatus(result.getFalseAcceptRate());
 			if (result.isVerified())
-				makeReport("The fingerprint was VERIFIED.");
+				makeReport("La Huella Digital fue VERIFICADA.");
 			else
-				makeReport("The fingerprint was NOT VERIFIED.");
+				makeReport("La Huella Digital NO FUE VERIFICADA.");
 		}
 	}
 	
 	private void updateStatus(int FAR)
 	{
-		// Show "False accept rate" value
-		setStatus(String.format("False Accept Rate (FAR) = %1$s", FAR));
+		// Muestra tasa de falso positivo
+		setStatus(String.format("Tasa de falso positivo (FAR) = %1$s", FAR));
 	}
 
 }
