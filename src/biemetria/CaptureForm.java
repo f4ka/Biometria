@@ -20,7 +20,7 @@ public class CaptureForm	extends JDialog
 	
     public CaptureForm(Frame owner) {
         super (owner, true);
-        setTitle("Fingerprint Enrollment");
+        setTitle("Alta Huella Digital");
 
 		setLayout(new BorderLayout());
 		rootPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -50,7 +50,7 @@ public class CaptureForm	extends JDialog
 		status.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		status.setFont(UIManager.getFont("Panel.font"));
 		
-		JButton quit = new JButton("Close");
+		JButton quit = new JButton("Cerrar");
         quit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { setVisible(false); }});
 

@@ -29,23 +29,23 @@ public class MainForm extends JFrame
 		this.setTitle("Fingerprint Enrollment and Verification Sample");
 		setResizable(false);
 
-		final JButton enroll = new JButton("Fingerprint Enrollment");
+		final JButton enroll = new JButton("Registrar Huella");
         enroll.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { onEnroll(); }});
 		
-		final JButton verify = new JButton("Fingerprint Verification");
+		final JButton verify = new JButton("Verificar Huella");
         verify.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { onVerify(); }});
 
-		final JButton save = new JButton("Save Fingerprint Template");
+		final JButton save = new JButton("Guardar Huella");
         save.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { onSave(); }});
 
-		final JButton load = new JButton("Read Fingerprint Template");
+		final JButton load = new JButton("Buscar Huella");
         load.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { onLoad(); }});
 
-		final JButton quit = new JButton("Close");
+		final JButton quit = new JButton("Cerrar");
         quit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { System.exit(0); }});
 		
