@@ -26,26 +26,26 @@ public class MainForm extends JFrame
 	MainForm() {
         setState(Frame.NORMAL);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		this.setTitle("Fingerprint Enrollment and Verification Sample");
+		this.setTitle("Ventana de Ingreso e busqueda de Huella Digital");
 		setResizable(false);
 
-		final JButton enroll = new JButton("Fingerprint Enrollment");
+		final JButton enroll = new JButton("Alta Huella Digital");
         enroll.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { onEnroll(); }});
 		
-		final JButton verify = new JButton("Fingerprint Verification");
+		final JButton verify = new JButton("Verificacion Huella Digital");
         verify.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { onVerify(); }});
 
-		final JButton save = new JButton("Save Fingerprint Template");
+		final JButton save = new JButton("Guardar Huella Digital");
         save.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { onSave(); }});
 
-		final JButton load = new JButton("Read Fingerprint Template");
+		final JButton load = new JButton("Leer Huella Digital");
         load.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { onLoad(); }});
 
-		final JButton quit = new JButton("Close");
+		final JButton quit = new JButton("Cerrar");
         quit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { System.exit(0); }});
 		
@@ -53,12 +53,9 @@ public class MainForm extends JFrame
 			public void propertyChange(PropertyChangeEvent evt) {
 				verify.setEnabled(template != null);
 				save.setEnabled(template != null);
-                                
-                                System.out.println(" -------------- > PASE ");
-                                
 				if (evt.getNewValue() == evt.getOldValue()) return;
 				if (template != null)
-					JOptionPane.showMessageDialog(MainForm.this, "The fingerprint template is ready for fingerprint verification.", "Fingerprint Enrollment", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(MainForm.this, "La Huella esta guardada, Lista para verificarse.", "Alta Huella Digital", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 			
@@ -106,8 +103,8 @@ public class MainForm extends JFrame
 						file = new File(file.toString() + ".fpt");
 					if (file.exists()) {
 						int choice = JOptionPane.showConfirmDialog(this,
-							String.format("File \"%1$s\" already exists.\nDo you want to replace it?", file.toString()),
-							"Fingerprint saving", 
+							String.format("Archivos \"%1$s\" ya existe.\nUsted quiere reemplazarlo?", file.toString()),
+							"Guardando Huella Digital", 
 							JOptionPane.YES_NO_CANCEL_OPTION);
 						if (choice == JOptionPane.NO_OPTION)
 							continue;
@@ -118,7 +115,7 @@ public class MainForm extends JFrame
 					stream.write(getTemplate().serialize());
 					stream.close();
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(), "Fingerprint saving", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(), "Guardando Huella", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 			break;
