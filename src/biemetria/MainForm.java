@@ -1,12 +1,15 @@
 
 package biemetria;
 
+import Components.Button;
 import java.io.*;
 import java.beans.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import com.digitalpersona.onetouch.*;
+import javax.swing.border.Border;
+import javax.swing.plaf.BorderUIResource;
 
 public class MainForm extends JFrame
 {
@@ -29,23 +32,34 @@ public class MainForm extends JFrame
 		this.setTitle("Ventana de Ingreso e busqueda de Huella Digital");
 		setResizable(false);
 
-		final JButton enroll = new JButton("Alta Huella Digital");
+		final Button enroll = new Button("Alta Huella Digital");
+                enroll.setBackground(Color.DARK_GRAY);
+                enroll.setForeground(Color.WHITE);
+                
         enroll.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { onEnroll(); }});
 		
-		final JButton verify = new JButton("Verificacion Huella Digital");
+		final Button verify = new Button("Verificacion Huella Digital");
+                verify.setBackground(Color.DARK_GRAY);
+                verify.setForeground(Color.WHITE);
         verify.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { onVerify(); }});
 
-		final JButton save = new JButton("Guardar Huella Digital");
+		final Button save = new Button("Guardar Huella Digital");
+                save.setBackground(Color.DARK_GRAY);
+                save.setForeground(Color.WHITE);                
         save.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { onSave(); }});
 
-		final JButton load = new JButton("Leer Huella Digital");
+		final Button load = new Button("Leer Huella Digital");
+                load.setBackground(Color.DARK_GRAY);
+                load.setForeground(Color.WHITE);                
         load.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { onLoad(); }});
 
-		final JButton quit = new JButton("Cerrar");
+		final Button quit = new Button("Cerrar");
+                quit.setBackground(Color.DARK_GRAY);
+                quit.setForeground(Color.WHITE);                
         quit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) { System.exit(0); }});
 		
@@ -66,19 +80,42 @@ public class MainForm extends JFrame
 		center.add(verify);
 		center.add(save);
 		center.add(load);
-		
-		JPanel bottom = new JPanel(new FlowLayout(FlowLayout.TRAILING));
-		bottom.setBorder(BorderFactory.createEmptyBorder(5, 20, 5, 20));
-		bottom.add(quit);
+                center.setBackground(Color.DARK_GRAY);
 
+                JPanel bottom = new JPanel(new FlowLayout(FlowLayout.CENTER));
+                
+                Button help = new Button("Acerca");
+                bottom.add(help);
+                
+                help.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+           
+                
+                Acerca acerca = new Acerca();
+                acerca.setVisible(true);
+                
+                
+            }
+        });
+                
+                bottom.setBorder(BorderFactory.createEmptyBorder(5, 20, 5, 20));
+		
+                bottom.add(quit);
+
+                
+                
 		setLayout(new BorderLayout());
 		add(center, BorderLayout.CENTER);
 		add(bottom, BorderLayout.PAGE_END);
 		
 		pack();
 		setSize((int)(getSize().width*1.6), getSize().height);
-        setLocationRelativeTo(null);
-		setTemplate(null);
+        
+                setLocationRelativeTo(null);
+		
+                setTemplate(null);
 		setVisible(true);
 	}
 	
