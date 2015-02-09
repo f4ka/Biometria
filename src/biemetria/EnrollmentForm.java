@@ -12,6 +12,7 @@ public class EnrollmentForm extends CaptureForm
 	
 	EnrollmentForm(Frame owner) {
 		super(owner);
+        
 	}
 	
 	@Override protected void init()
@@ -19,7 +20,8 @@ public class EnrollmentForm extends CaptureForm
 		super.init();
 		this.setTitle("Registro de Huellas");
 		updateStatus();
-	}
+
+        }
 
 	@Override protected void process(DPFPSample sample) {
 		super.process(sample);
@@ -55,12 +57,14 @@ public class EnrollmentForm extends CaptureForm
 					break;
 			}
 		}
+                
 	}
 	
 	private void updateStatus()
 	{
 		// Muestra el numero de muestras necesarias
 		setStatus(String.format("Muestras de Huella necesarias: %1$s", enroller.getFeaturesNeeded()));
+                
 	}
 	
 }
